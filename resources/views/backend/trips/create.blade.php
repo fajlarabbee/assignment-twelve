@@ -14,12 +14,6 @@
         <form action="{{ route('trips.store') }}" class="space-y-5 border p-6 rounded" method="POST"
               enctype="multipart/form-data">
             @csrf
-
-            <div>
-                <label for="name">Name <span class="text-danger">required</span></label>
-                <input id="name" name="name" type="text" value="{{ old('name') }}" class="form-input"/>
-            </div>
-
             <div>
                 <label for="bus_id">Bus <span class="text-danger">required</span></label>
                 <select name="bus_id" id="bus_id" class="form-select text-white-dark">

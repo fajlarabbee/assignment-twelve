@@ -20,6 +20,7 @@ class SearchController extends Controller
     {
         $origin = $request->origin;
         $destination = $request->destination;
+        $date = $request->date;
 
         $trip = Trip::query();
 

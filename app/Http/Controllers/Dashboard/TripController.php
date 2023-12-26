@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTripRequest;
+use App\Models\Bus;
 use App\Models\Location;
 use App\Models\Route;
 use App\Models\Trip;
@@ -29,7 +30,7 @@ class TripController extends Controller
     {
         $locations = Location::get();
         $routes = Route::where('status', '=', Status::ACTIVE->value)->get();
-        $buses = Route::where('status', '=', Status::ACTIVE->value)->get();
+        $buses = Bus::where('status', '=', Status::ACTIVE->value)->get();
         return view('backend.trips.create', compact('locations', 'routes', 'buses'));
     }
 
@@ -56,7 +57,13 @@ class TripController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $locations = Location::get();
+        $routes = Route::where('status', '=', Status::ACTIVE->value)->get();
+        $buses = Bus::where('status', '=', Status::ACTIVE->value)->get();
+
+        $trip = Trip::findOrFail($id);
+
+        return view('backend.trips.edit', compact('locations', 'routes', 'buses', 'trip'));
     }
 
     /**

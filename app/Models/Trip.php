@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Trip extends Model
 {
@@ -36,6 +37,11 @@ class Trip extends Model
         return $this->belongsTo(Route::class);
     }
 
+    public function bus(): BelongsTo
+    {
+        return $this->belongsTo(Bus::class);
+    }
+
     public function departureLocation(): BelongsTo
     {
         return $this->belongsTo(Location::class, 'departure_location_id');
@@ -44,6 +50,11 @@ class Trip extends Model
     public function destinationLocation(): BelongsTo
     {
         return $this->belongsTo(Location::class, 'destination_location_id');
+    }
+
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(Ticket::class);
     }
 
 

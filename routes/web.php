@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\RouteController;
 use App\Http\Controllers\Dashboard\TripController;
 use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -38,6 +39,8 @@ Route::resource('/dashboard/trips', TripController::class)->middleware(['auth'])
 Route::get('/', [SearchController::class, 'index'])->name('search.index');
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
+// Ticket Controller
+Route::get('/ticket/create/{trip}', [TicketController::class, 'create'])->name('ticket.create');
 
 
 require __DIR__.'/auth.php';
