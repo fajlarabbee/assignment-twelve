@@ -11,4 +11,6 @@ class Bus extends Model
 
 
     protected $fillable = ['name', 'status', 'type', 'seat_capacity'];
+
+    protected $hidden = ['created_at', 'updated_at'];
 }

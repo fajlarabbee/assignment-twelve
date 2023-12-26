@@ -28,6 +28,9 @@ class Trip extends Model
     ];
 
 
+    protected $hidden = ['created_at', 'updated_at'];
+
+
     public function route(): BelongsTo
     {
         return $this->belongsTo(Route::class);
