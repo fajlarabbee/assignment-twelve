@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Trip extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'route_id',
         'bus_id',

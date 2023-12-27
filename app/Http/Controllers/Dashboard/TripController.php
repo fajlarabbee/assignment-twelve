@@ -31,6 +31,7 @@ class TripController extends Controller
         $locations = Location::get();
         $routes = Route::where('status', '=', Status::ACTIVE->value)->get();
         $buses = Bus::where('status', '=', Status::ACTIVE->value)->get();
+
         return view('backend.trips.create', compact('locations', 'routes', 'buses'));
     }
 
@@ -39,8 +40,8 @@ class TripController extends Controller
      */
     public function store(StoreTripRequest $request)
     {
-        Trip::create($request->validated());
 
+        Trip::create($request->validated());
         return back()->with('success', 'Trip added successfully');
     }
 
@@ -69,9 +70,10 @@ class TripController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreTripRequest $request, string $id)
     {
-        //
+        Trip::where('id', $id)->update($request->validated());
+        return back()->with('success', 'Trip updated successfully');
     }
 
     /**
@@ -79,6 +81,8 @@ class TripController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Trip::where('id', $id)->delete();
+
+        return back()->with('success', 'Trip deleted');
     }
 }

@@ -14,6 +14,7 @@
         <form action="{{ route('trips.store') }}" class="space-y-5 border p-6 rounded" method="POST"
               enctype="multipart/form-data">
             @csrf
+
             <div>
                 <label for="bus_id">Bus <span class="text-danger">required</span></label>
                 <select name="bus_id" id="bus_id" class="form-select text-white-dark">
@@ -74,6 +75,7 @@
                         class="text-danger">required</span></label>
                 <div>
                     <x-custom.form.checkbox label="Saturday" name="available_days[saturday]"
+                                            :check="(is_array(old('available_days')) && array_key_exists('saturday', old('available_days'))) ? 'checked' : ''"
                                             id="available_days_saturday"/>
                     <x-custom.form.checkbox label="Sunday" name="available_days[sunday]" id="available_days_sunday"/>
                     <x-custom.form.checkbox label="Monday" name="available_days[monday]" id="available_days_monday"/>

@@ -11,9 +11,10 @@
     <div class="mx-auto max-w-xl">
         <x-custom.form-messages/>
         <!-- form controls -->
-        <form action="{{ route('trips.store') }}" class="space-y-5 border p-6 rounded" method="POST"
+        <form action="{{ route('trips.update', $trip->id) }}" class="space-y-5 border p-6 rounded" method="POST"
               enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div>
                 <label for="bus_id">Bus <span class="text-danger">required</span></label>
                 <select name="bus_id" id="bus_id" class="form-select text-white-dark">
@@ -74,22 +75,33 @@
                         class="text-danger">required</span></label>
                 <div>
                     <x-custom.form.checkbox label="Saturday" name="available_days[saturday]"
-                                            id="available_days_saturday"/>
-                    <x-custom.form.checkbox label="Sunday" name="available_days[sunday]" id="available_days_sunday"/>
-                    <x-custom.form.checkbox label="Monday" name="available_days[monday]" id="available_days_monday"/>
+                                            :check="(array_key_exists('saturday', $trip->available_days) || (is_array(old('available_days')) && array_key_exists('saturday', old('available_days')))) ? 'checked' : ''"
+                                            id="available_days_saturday" />
+                    <x-custom.form.checkbox label="Sunday" name="available_days[sunday]"
+                                            :check="(array_key_exists('sunday', $trip->available_days) || (is_array(old('available_days')) && array_key_exists('sunday', old('available_days')))) ? 'checked' : ''"
+                                            id="available_days_sunday"/>
+                    <x-custom.form.checkbox label="Monday" name="available_days[monday]"
+                                            :check="(array_key_exists('monday', $trip->available_days) || (is_array(old('available_days')) && array_key_exists('monday', old('available_days')))) ? 'checked' : ''"
+                                            id="available_days_monday"/>
                     <x-custom.form.checkbox label="Tuesday" name="available_days[tuesday]"
+                                            :check="(array_key_exists('tuesday', $trip->available_days) || (is_array(old('available_days')) && array_key_exists('tuesday', old('available_days')))) ? 'checked' : ''"
                                             id="available_days_tuesday"/>
                     <x-custom.form.checkbox label="Wednesday" name="available_days[wednesday]"
+                                            :check="(array_key_exists('wednesday', $trip->available_days) || (is_array(old('available_days')) && array_key_exists('wednesday', old('available_days')))) ? 'checked' : ''"
                                             id="available_days_wednesday"/>
                     <x-custom.form.checkbox label="Thursday" name="available_days[thursday]"
+                                            :check="(array_key_exists('thursday', $trip->available_days) || (is_array(old('available_days')) && array_key_exists('thursday', old('available_days')))) ? 'checked' : ''"
                                             id="available_days_thursday"/>
-                    <x-custom.form.checkbox label="Friday" name="available_days[friday]" id="available_days_friday"/>
+                    <x-custom.form.checkbox label="Friday" name="available_days[friday]"
+                                            :check="(array_key_exists('friday', $trip->available_days) || (is_array(old('available_days')) && array_key_exists('friday', old('available_days')))) ? 'checked' : ''"
+                                            id="available_days_friday"/>
+
                 </div>
             </div>
 
             <div>
                 <label for="price">Price <span class="text-danger">required</span></label>
-                <input id="price" name="price" type="number" step="0.01" value="{{ old('price') }}" class="form-input"/>
+                <input id="price" name="price" type="number" step="0.01" value="{{ old('price', $trip->price) }}" class="form-input"/>
             </div>
 
             <div>
@@ -97,7 +109,7 @@
                 <select name="status" id="status" class="form-select text-white-dark">
                     @foreach(\App\Enums\Status::cases() as $status)
                         <option
-                            value="{{ $status->value }}" {{ old('status') == $status->value ? "selected" : "" }}>{{ $status->status() }}</option>
+                            value="{{ $status->value }}" {{ old('status', $trip->status) == $status->value ? "selected" : "" }}>{{ $status->status() }}</option>
                     @endforeach
                 </select>
             </div>
