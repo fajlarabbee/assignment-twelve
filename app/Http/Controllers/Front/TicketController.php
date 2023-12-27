@@ -52,10 +52,7 @@ class TicketController extends Controller
             'trip_id' => decrypt($trip),
             'number_of_tickets' => count($validated->seat_number),
         ];
-
         
-
-        dd($validated);
     }
 
     /**
