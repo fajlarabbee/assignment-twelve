@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Location;
 use App\Models\Trip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class SearchController extends Controller
 {
@@ -20,7 +21,11 @@ class SearchController extends Controller
     {
         $origin = $request->origin;
         $destination = $request->destination;
-        $date = $request->date;
+        $date = Carbon::createFromFormat('Y-m-d', $request->date);
+        $day = strtolower($date->dayName);
+
+
+
 
         $trip = Trip::query();
 
@@ -30,6 +35,10 @@ class SearchController extends Controller
 
         if($destination) {
             $trip->where('destination_location_id', '=', $destination);
+        }
+
+        if($day) {
+            $trip->whereJsonContains("available_days->{$day}", 'on');
         }
 
         $results = $trip->orderByDesc('created_at')->paginate(10)->withQueryString();

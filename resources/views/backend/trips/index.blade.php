@@ -25,6 +25,7 @@
                         <th style="width: 15%;"><a href="#">Departure Time</a></th>
                         <th style="width: 15%;"><a href="#">Arrival Time</a></th>
                         <th style="width: 15%;"><a href="#">Available Days</a></th>
+                        <th style="width: 15%;"><a href="#">Fare</a></th>
                         <th style="width: 15%;"><a href="#">Status</a></th>
                         <th style="width: 15%;"><a href="#">Actions</a></th>
                     </tr>
@@ -42,6 +43,7 @@
                                    <span class="badge bg-primary">{{ ucfirst($key) }}</span>
                                @endforeach
                            </td>
+                           <td>{{ $trip->price }}</td>
                            <td><span class="{{ \App\Enums\Status::tryFrom($trip->status)->statusClass() }}" >{{ \App\Enums\Status::tryFrom($trip->status)->status() }}</span></td>
                            <td class="border-b border-[#ebedf2] p-3 text-center dark:border-[#191e3a]">
                                <a  href="{{ route('trips.edit', $trip->id) }}" type="button" x-tooltip="Edit">

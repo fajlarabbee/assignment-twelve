@@ -8,7 +8,7 @@
 
 
 <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
-    <div class="main-content flex min-h-screen flex-col">
+    <div class="main-content flex min-h-screen flex-col" style="margin-left:0">
 
         <div class="animate__animated p-6" :class="[$store.app.animation]">
             <!-- start main content section -->
