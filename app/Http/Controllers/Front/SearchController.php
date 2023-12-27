@@ -22,6 +22,9 @@ class SearchController extends Controller
         $origin = $request->origin;
         $destination = $request->destination;
         $date = Carbon::createFromFormat('Y-m-d', $request->date);
+        if(Carbon::today() > $date) {
+            return back()->with('error', 'Past date not allowed');
+        }
         $day = strtolower($date->dayName);
 
 

@@ -16,4 +16,5 @@ class SeatAllocation extends Model
         return $this->belongsTo(Ticket::class);
     }
 
+
 }

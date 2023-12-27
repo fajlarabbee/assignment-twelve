@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone_number', 50)->unique();
             $table->string('user_role')->default(UserRole::USER->value);
+            $table->mediumText('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
