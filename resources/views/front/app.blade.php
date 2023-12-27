@@ -9,19 +9,10 @@
 
 <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
     <div class="main-content flex min-h-screen flex-col" style="margin-left:0">
-
+        <x-header.horizontal/>
         <div class="animate__animated p-6" :class="[$store.app.animation]">
             <!-- start main content section -->
             <div>
-                <ul class="flex space-x-2 rtl:space-x-reverse">
-                    <li>
-                        <a href="{{ route('dashboard') }}" class="text-primary hover:underline">Home</a>
-                    </li>
-                    <li class="before:content-['/'] ltr:before:mr-1 rtl:before:ml-1">
-                        <span>@yield('crumb-text', 'Home')</span>
-                    </li>
-                </ul>
-
                 <div class="pt-5">
                     @yield('content')
                 </div>
