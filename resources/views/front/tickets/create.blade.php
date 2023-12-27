@@ -27,6 +27,10 @@
                 <textarea id="address" name="address" class="form-input">{{ old('address') }}</textarea>
             </div>
 
+            <div>
+                <label for="fare">Fare</label>
+                <p class="form-input">{{ $trip->price }}</p>
+            </div>
 
 
             <div>
@@ -48,8 +52,8 @@
             </div>
 
             <div>
-                <label for="date">Date:</label>
-                <input id="date" name="date" type="date" value="{{ old('date') }}" class="form-input" />
+                <label for="trip_date">Date:</label>
+                <input id="trip_date" name="trip_date" type="date" value="{{ old('trip_date') }}" class="form-input" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

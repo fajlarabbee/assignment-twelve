@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '01700000000'
         ]);
 
-        Location::factory(3)->create();
-        Bus::factory(3)->create();
+        //Location::factory(3)->create();
+        //Bus::factory(3)->create();
     }
 }

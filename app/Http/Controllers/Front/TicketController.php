@@ -41,30 +41,31 @@ class TicketController extends Controller
      */
     public function store(Request $request, $trip)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:200',
-            'email' => 'required|email',
-            'seat_number' => 'required',
-            'date' => 'required|date|after_or_equal:today',
-            'address' => 'nullable|string|max:1000',
-            'phone_number' => 'required|string'
-        ]);
-
-        $user_data = [
-            'email' => $validated['email'],
-            'name' => $validated['name'],
-            'address' => $validated['address'],
-            'phone_number' => $validated['phone_number'],
-            'password' => Hash::make('password')
-        ];
-
         DB::beginTransaction();
         try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:200',
+                'email' => 'required|email',
+                'seat_number' => 'required',
+                'trip_date' => 'required|date|after_or_equal:today',
+                'address' => 'nullable|string|max:1000',
+                'phone_number' => 'required|string'
+            ]);
+
+            $user_data = [
+                'email' => $validated['email'],
+                'name' => $validated['name'],
+                'address' => $validated['address'],
+                'phone_number' => $validated['phone_number'],
+                'password' => Hash::make('password')
+            ];
+
             $user = User::create($user_data);
 
             $ticket_data = [
+                'trip_date' => $validated['trip_date'],
                 'trip_id' => decrypt($trip),
-                'number_of_tickets' => count($validated['seat_number']),
+                'quantity' => count($validated['seat_number']),
             ];
 
             $ticket = $user->tickets()->create($ticket_data);
@@ -82,9 +83,10 @@ class TicketController extends Controller
 
             DB::commit();
 
-            return to_route('search.index')->with('success', 'Ticket purchased successfully!')->status(Response::HTTP_CREATED);
+            return to_route('search.index')->with('success', 'Ticket purchased successfully!');
         }catch(\Exception $e) {
             DB::rollBack();
+            return back()->withErrors($e->getMessage());
         }
 
     }

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('trip_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->unsignedInteger('number_of_tickets')->default(0);
+            $table->date('trip_date');
+            $table->unsignedInteger('quantity')->default(0);
+            $table->decimal('price')->default(0);
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

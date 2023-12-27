@@ -27,6 +27,7 @@
                             <th style="width: 15%;"><a href="#">Destination</a></th>
                             <th style="width: 15%;"><a href="#">Departure Time</a></th>
                             <th style="width: 15%;"><a href="#">Arrival Time</a></th>
+                            <th style="width: 15%;"><a href="#">Available Seats</a></th>
                             <th style="width: 15%;"><a href="#">Fare</a></th>
                             <th style="width: 15%;"><a href="#">Actions</a></th>
                         </tr>
@@ -39,6 +40,7 @@
                                 <td>{{ $trip->destinationLocation->name }}</td>
                                 <td>{{ $trip->departure_time }}</td>
                                 <td>{{ $trip->arrival_time }}</td>
+                                <td>{{ $trip->bus->seat_capacity - $trip->tickets->sum('quantity') }} / {{ $trip->bus->seat_capacity }}</td>
                                 <td>{{ $trip->price }}</td>
                                 <td class="border-b border-[#ebedf2] p-3 text-center dark:border-[#191e3a]">
                                     <x-custom.link :url="route('ticket.create', encrypt($trip->id))">

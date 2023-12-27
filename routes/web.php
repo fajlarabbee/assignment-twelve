@@ -3,7 +3,9 @@
 use App\Http\Controllers\Dashboard\BusController;
 use App\Http\Controllers\Dashboard\LocationController;
 use App\Http\Controllers\Dashboard\RouteController;
+use App\Http\Controllers\Dashboard\TicketController as DashboardTicketController;
 use App\Http\Controllers\Dashboard\TripController;
+use App\Http\Controllers\Dashboard\User\TicketController as UserTicketController;
 use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Front\TicketController;
@@ -44,6 +46,15 @@ Route::get('/ticket/create/{trip}', [TicketController::class, 'create'])->name('
 Route::post('/ticket/create/{trip}', [TicketController::class, 'store'])->name('ticket.store');
 
 Route::get('/tickets', [TicketController::class, 'index']);
+
+// Admin Dashboard
+Route::resource('/dashboard/tickets', DashboardTicketController::class, ['as' => 'dashboard']);
+
+
+// User Dashboard
+Route::prefix('/dashboard/user')->group(function() {
+   Route::get('/', [UserTicketController::class, 'index']);
+});
 
 
 require __DIR__.'/auth.php';

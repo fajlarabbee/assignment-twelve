@@ -89,6 +89,14 @@
                 @endphp
                 <x-custom.sidebar-dropdown-link-item name="trips" label="Trips" :links="$trip_links" />
 
+                @php
+                    $ticket_links = [
+                     'Add New' => route('dashboard.tickets.create'),
+                     'View All' => route('dashboard.tickets.index')
+                    ];
+                @endphp
+                <x-custom.sidebar-dropdown-link-item name="tickets" label="Tickets" :links="$ticket_links" />
+
             </ul>
         </div>
     </nav>

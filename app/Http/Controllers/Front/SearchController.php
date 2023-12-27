@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use App\Models\Ticket;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -44,7 +45,7 @@ class SearchController extends Controller
             $trip->whereJsonContains("available_days->{$day}", 'on');
         }
 
-        $results = $trip->orderByDesc('created_at')->paginate(10)->withQueryString();
+        $results = $trip->with('bus', 'tickets')->orderByDesc('created_at')->paginate(10)->withQueryString();
 
         return view('front.search-results', compact('results'));
     }
