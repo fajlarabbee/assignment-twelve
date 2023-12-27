@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Trip extends Model
 {
@@ -56,6 +57,12 @@ class Trip extends Model
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class);
+    }
+
+
+    public function seats(): HasManyThrough
+    {
+        return $this->hasManyThrough(SeatAllocation::class, Ticket::class);
     }
 
 

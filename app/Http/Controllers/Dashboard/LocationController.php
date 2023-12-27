@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLocationRequest;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class LocationController extends Controller
 {
@@ -36,7 +37,7 @@ class LocationController extends Controller
 
         Location::create($validated);
 
-        return back()->with('success', 'Location Added Successfully');
+        return back(Response::HTTP_CREATED)->with('success', 'Location Added Successfully');
     }
 
     /**

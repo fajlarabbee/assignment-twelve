@@ -10,6 +10,7 @@ class SeatAllocation extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['seat_number', 'ticket_id'];
 
     public function ticket(): BelongsTo
     {

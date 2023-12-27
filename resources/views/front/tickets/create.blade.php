@@ -14,7 +14,7 @@
             </div>
             <div>
                 <label for="email">Email <span class="text-danger">required</span></label>
-                <input id="email" name="email" type="text" value="{{ old('email') }}" class="form-input" />
+                <input id="email" name="email" type="email" value="{{ old('email') }}" class="form-input" />
             </div>
 
             <div>
@@ -40,7 +40,8 @@
                             :label="$i"
                             :name="'seat_number[' . $i . ']'"
                             :id="'seat_number_'.$i"
-                            :check="(is_array(old('seat_number')) && array_key_exists($i, old('seat_number'))) ? 'checked' : ''"
+                            :disable="($tickets->has($i) ? 'disabled': '')"
+                            :check="(is_array(old('seat_number')) && array_key_exists($i, old('seat_number'))) ? 'checked': ''"
                         />
                     @endfor
                 </div>
@@ -59,3 +60,14 @@
         </form>
     </div>
 @endsection
+
+@push('styles')
+    <style type="text/css">
+        .peer:disabled~.peer-checked\:bg-primary {
+            background: rgb(255 0 0 / var(--tw-bg-opacity)) !important;
+        }
+        .peer:disabled~.peer-checked\:bg-primary::before {
+            left: 1.75rem;
+        }
+    </style>
+@endpush
